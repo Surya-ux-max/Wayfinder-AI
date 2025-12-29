@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Wayfinder – Agentic AI Career Assistant</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Markdown Renderer -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'chat-bg': '#0b0f19',
+            'chat-border': '#1f2937',
+            'chat-text': '#ffffff',
+            'chat-secondary': '#9ca3af'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- 🌌 STARFIELD + GLASS -->
+  <style>
+  .stars,
+  .stars::after {
+    position: fixed;
+    inset: 0;
+    background-repeat: repeat;
+    background-size: 400px 400px; /* ⭐ larger spread */
+    animation: starMove 8s linear infinite; /* 🚀 faster */
+    z-index: 0;
+  }
+
+  .stars {
+    background-image:
+      radial-gradient(5px 5px at 20% 30%, #ffffff, transparent),
+      radial-gradient(4.5px 4.5px at 80% 70%, #ffffff, transparent),
+      radial-gradient(2px 2px at 50% 50%, #ffffff, transparent);
+    opacity: 0.65;
+  }
+
+  .stars::after {
+    content: "";
+    background-image:
+      radial-gradient(2px 2px at 10% 80%, #ffffff, transparent),
+      radial-gradient(3px 3px at 90% 20%, #ffffff, transparent);
+    opacity: 0.45;
+    animation-duration: 18s; /* slightly slower layer */
+  }
+
+  @keyframes starMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(-400px); }
+  }
+
+  .glass {
+    background: rgba(8, 12, 22, 0.75);
+    backdrop-filter: blur(14px);
+  }
+</style>
+
+</head>
+
+<body class="h-screen w-screen overflow-hidden bg-black text-chat-text">
+
+<!-- STARS -->
+<div class="stars"></div>
+
+<!-- ================= LANDING PAGE ================= -->
+<div id="landingPage" class="relative h-full w-full flex z-10">
+
+  <!-- VIDEO -->
+  <div class="w-1/2 h-full relative overflow-hidden">
+    <video
+      class="absolute inset-0 w-full h-full object-cover"
+      src="assests/video.mp4"
+      autoplay
+      muted
+      loop
+      playsinline>
+    </video>
+    <div class="absolute inset-0 bg-black/60"></div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="w-1/2 flex items-center justify-center bg-black px-16">
+    <div class="max-w-md">
+      <h1 class="text-5xl font-bold mb-6 tracking-tight">Wayfinder</h1>
+      <p class="text-lg text-chat-secondary mb-10 leading-relaxed">
+        Your AI-powered career mentor for skills, clarity, and growth.
+        Student's Most Trusted Career Companion.
+      </p>
+      <button onclick="goToApp()"
+        class="w-full bg-white text-black py-4 rounded-xl text-lg font-semibold hover:scale-[1.03] transition">
+        Get Started
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MAIN APP ================= -->
+<div id="appPage" class="hidden relative h-full w-full overflow-auto z-10">
+
+  <!-- HEADER -->
+  <header class="sticky top-0 bg-black/80 backdrop-blur border-b border-chat-border">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <span class="text-xl font-semibold tracking-wide">Wayfinder</span>
+      </div>
+      <nav class="text-sm text-chat-secondary space-x-6">
+        <span>Ask</span>
+        <span>Resume</span>
+        <span>Insights</span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="max-w-3xl mx-auto p-8 space-y-10">
+
+    <!-- ASK -->
+    <section class="glass border border-chat-border rounded-2xl p-6 hover:border-white/40 transition-all">
+      <h3 class="text-xl font-semibold mb-4 tracking-wide">
+        Ask a Career Question
+      </h3>
+      <textarea id="question"
+        class="w-full h-32 bg-chat-bg border border-chat-border rounded-xl p-5 text-base placeholder:text-chat-secondary resize-none"
+        placeholder="Ask anything about careers, skills, roadmap, projects..."></textarea>
+      <button onclick="setMode('ask'); askQuestion();"
+        class="mt-4 bg-white text-black px-6 py-3 rounded-xl text-base font-semibold hover:scale-[1.03] transition">
+        Ask AI
+      </button>
+    </section>
+
+    <!-- RESUME -->
+    <section class="glass border border-chat-border rounded-2xl p-6 hover:border-white/40 transition-all">
+      <h3 class="text-xl font-semibold mb-4 tracking-wide">
+        Analyze Your Resume
+      </h3>
+      <input type="file" id="resume" accept=".pdf"
+        class="block w-full text-sm text-chat-secondary file:bg-white file:text-black file:px-4 file:py-2 file:rounded-lg">
+      <button onclick="analyzeResume()"
+        class="mt-4 bg-white text-black px-6 py-3 rounded-xl text-base font-semibold hover:scale-[1.03] transition">
+        Analyze Resume
+      </button>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="grid grid-cols-2 gap-4">
+      <button onclick="setMode('skill_gaps')" class="glass border border-chat-border rounded-xl py-4 hover:border-white/40 transition">
+        🔍 Skill Gaps
+      </button>
+      <button onclick="setMode('roadmap')" class="glass border border-chat-border rounded-xl py-4 hover:border-white/40 transition">
+        🗺️ Career Roadmap
+      </button>
+      <button onclick="setMode('projects')" class="glass border border-chat-border rounded-xl py-4 hover:border-white/40 transition">
+        💡 Project Ideas
+      </button>
+      <button onclick="setMode('resources')" class="glass border border-chat-border rounded-xl py-4 hover:border-white/40 transition">
+        📚 Learning Resources
+      </button>
+    </section>
+
+    <!-- OUTPUT -->
+    <section class="glass border border-chat-border rounded-2xl p-6 hover:border-white/40 transition-all">
+      <h3 class="text-xl font-semibold mb-4 tracking-wide">
+        AI Response
+      </h3>
+      <div id="output"
+        class="prose prose-invert max-w-none bg-chat-bg p-6 rounded-xl border border-chat-border text-chat-text">
+        <p class="text-chat-secondary text-center">
+          Waiting for input…
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="text-center text-chat-secondary text-sm py-6">
+    © 2025 Career Guru · Built with Agentic AI
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

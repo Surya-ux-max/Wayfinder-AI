@@ -14,10 +14,14 @@
 | ZERA SHAHADIYA .S | Member |
 | VIHASHINI.K.S | Member |
 
+## Documentation
+
+- **[DOCUMENTATION.md](https://drive.google.com/drive/folders/1oUQz4nv3RBhm0X_SbdaEPRVK6xfWPr3o?usp=drive_link)** - Complete guide (API, deployment, architecture)
+- **[DEMO VIDEO.md](https://drive.google.com/drive/u/0/folders/1VNcIQZ4tTG58mBytobF2kunWdkxQ-vJP)**
 
 ## OVERVIEW
 
-Wayfinder-AI analyzes resumes and provides career guidance through AI-powered conversations. Upload your resume or ask career questions to get personalized insights, skill assessments, and learning roadmaps.
+Wayfinder-AI analyzes resumes and provides career guidance through AI-powered conversations. Upload your resume or ask career questions to get personalized insights, skill assessments, and learning roadmaps. 
 
 ## Features
 
@@ -104,10 +108,6 @@ Get API key: [Google AI Studio](https://makersuite.google.com/app/apikey)
 3. **For Questions:** Select mode → Type question → Click "Ask AI"
 
 **Modes:** `ask`, `skill_gaps`, `projects`, `roadmap`, `resources`
-
-## Documentation
-
-- **[DOCUMENTATION.md](https://drive.google.com/drive/folders/1oUQz4nv3RBhm0X_SbdaEPRVK6xfWPr3o?usp=drive_link)** - Complete guide (API, deployment, architecture)
 
 ## Security Notes
 

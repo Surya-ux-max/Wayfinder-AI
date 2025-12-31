@@ -9,8 +9,8 @@
 
 | Name | Role |
 |------|------|
-| TAMILSELVAN.P | Team Lead |
-| SURYAPRAKASH | Member |
+| SURYAPRAKASH S | Team Lead |
+| TAMILSELVAN P | Member |
 | ZERA SHAHADIYA .S | Member |
 | VIHASHINI.K.S | Member |
 

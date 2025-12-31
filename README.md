@@ -18,6 +18,7 @@
 
 - **[DOCUMENTATION.md](https://drive.google.com/drive/folders/1oUQz4nv3RBhm0X_SbdaEPRVK6xfWPr3o?usp=drive_link)** - Complete guide (API, deployment, architecture)
 - **[DEMO VIDEO.md](https://drive.google.com/drive/u/0/folders/1VNcIQZ4tTG58mBytobF2kunWdkxQ-vJP)**
+- **[FRONTEND DEPLOYMENT LINK](https://wayfinder-ai-one.vercel.app/) - Suitable for Desktop Tab version**
 
 ## OVERVIEW
 

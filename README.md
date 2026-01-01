@@ -112,7 +112,7 @@ Get API key: [Google AI Studio](https://makersuite.google.com/app/apikey)
 
 ## Security Notes
 
-⚠️ Development version - Not production-ready:
+ Development version - Not production-ready:
 - Debug mode enabled
 - No CSRF protection
 - No rate limiting

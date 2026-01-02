@@ -4,71 +4,15 @@ from flask_cors import CORS
 from resume_parser import extract_text_from_pdf
 from agent import analyze_career_profile, handle_feature_question
 from database import ChatDatabase
-from auth import AuthManager
 
 app = Flask(__name__)
 CORS(app)
 db = ChatDatabase()
-auth = AuthManager()
 
 
 @app.route("/", methods=["GET"])
 def home():
     return "Backend is running"
-
-
-# --------------------------------------------------
-# Authentication Endpoints
-# --------------------------------------------------
-@app.route("/auth/register", methods=["POST"])
-def register():
-    data = request.get_json()
-    
-    if not data or not all(k in data for k in ['email', 'password', 'name']):
-        return jsonify({"error": "Email, password, and name required"}), 400
-    
-    result = auth.register_user(data['email'], data['password'], data['name'])
-    
-    if 'error' in result:
-        return jsonify(result), 400
-    
-    return jsonify(result)
-
-@app.route("/auth/login", methods=["POST"])
-def login():
-    data = request.get_json()
-    print(f"Login request received: {data}")
-    
-    if not data or not all(k in data for k in ['email', 'password']):
-        print("Missing email or password")
-        return jsonify({"error": "Email and password required"}), 400
-    
-    print(f"Attempting login for email: {data['email']}")
-    result = auth.login_user(data['email'], data['password'])
-    print(f"Login result: {result}")
-    
-    if 'error' in result:
-        return jsonify(result), 400
-    
-    return jsonify(result)
-
-
-# --------------------------------------------------
-# Authentication Helper
-# --------------------------------------------------
-def get_user_from_token():
-    token = request.headers.get('Authorization')
-    if not token:
-        return None
-    
-    if token.startswith('Bearer '):
-        token = token[7:]
-    
-    result = auth.verify_token(token)
-    if 'error' in result:
-        return None
-    
-    return result
 
 
 # --------------------------------------------------
@@ -101,12 +45,9 @@ def ask():
     if not data or "question" not in data:
         return jsonify({"error": "Question is required"}), 400
 
-    # Get user from token or use anonymous
-    user = get_user_from_token()
-    user_id = user['user_id'] if user else 'anonymous'
-    
     mode = data.get("mode", "ask")
     question = data["question"]
+    user_id = data.get("user_id", "anonymous")
     session_id = data.get("session_id")
 
     answer = handle_feature_question(mode, question)
@@ -130,11 +71,6 @@ def ask():
 # --------------------------------------------------
 @app.route("/chat/sessions/<user_id>", methods=["GET"])
 def get_user_sessions(user_id):
-    # Verify user can access these sessions
-    user = get_user_from_token()
-    if user and user['user_id'] != user_id:
-        return jsonify({"error": "Unauthorized"}), 403
-    
     print(f"Getting sessions for user: {user_id}")
     try:
         sessions = db.get_user_sessions(user_id)

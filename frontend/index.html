@@ -25,15 +25,58 @@
     }
   </script>
 
-  <!-- 🌌 STARFIELD + GLASS -->
+  <!-- 🌌 STARFIELD + GLASS + PROFESSIONAL STYLES -->
   <style>
+  /* Professional font and smoothing */
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+    line-height: 1.5;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+  }
+  
+  *, *::before, *::after {
+    box-sizing: border-box;
+    border: 0 solid;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: rgba(31, 41, 55, 0.3);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 9999px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(156, 163, 175, 0.8);
+  }
+  
+  /* Starfield animation */
   .stars,
   .stars::after {
     position: fixed;
     inset: 0;
     background-repeat: repeat;
-    background-size: 400px 400px; /* ⭐ larger spread */
-    animation: starMove 8s linear infinite; /* 🚀 faster */
+    background-size: 400px 400px;
+    animation: starMove 8s linear infinite;
     z-index: 0;
   }
 
@@ -51,7 +94,7 @@
       radial-gradient(2px 2px at 10% 80%, #ffffff, transparent),
       radial-gradient(3px 3px at 90% 20%, #ffffff, transparent);
     opacity: 0.45;
-    animation-duration: 18s; /* slightly slower layer */
+    animation-duration: 18s;
   }
 
   @keyframes starMove {
@@ -63,20 +106,108 @@
     background: rgba(8, 12, 22, 0.75);
     backdrop-filter: blur(14px);
   }
+  
+  /* Professional typography */
+  .font-inter {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  /* Enhanced transitions */
+  .transition-all {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Stylish text effects */
+  .hero-title {
+    background: linear-gradient(135deg, #ffffff 0%, #e5e7eb 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+    transform: perspective(500px) rotateX(15deg);
+    letter-spacing: -0.02em;
+  }
+  
+  .hero-subtitle {
+    background: linear-gradient(90deg, #ffffff 0%, #d1d5db 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transform: perspective(300px) rotateX(8deg);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Card shimmer effects */
+  .shimmer-card {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .shimmer-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.5s;
+  }
+  
+  .shimmer-card:hover::before {
+    left: 100%;
+  }
+  
+  .typing-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .typing-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #9ca3af;
+    animation: typing 1.4s infinite ease-in-out;
+  }
+  
+  .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+  .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+  
+  @keyframes typing {
+    0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+    40% { transform: scale(1); opacity: 1; }
+  }
+  
+  .pulse-border {
+    animation: pulse-border 2s infinite;
+  }
+  
+  @keyframes pulse-border {
+    0% { border-color: rgba(31, 41, 55, 0.5); }
+    50% { border-color: rgba(255, 255, 255, 0.3); }
+    100% { border-color: rgba(31, 41, 55, 0.5); }
+  }
 </style>
+
+<!-- Inter Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
-<body class="h-screen w-screen overflow-hidden bg-black text-chat-text">
+<body class="bg-black text-chat-text font-inter">
 
 <!-- STARS -->
 <div class="stars"></div>
 
-<!-- ================= AUTH PAGE ================= -->
-<div id="authPage" class="relative h-full w-full flex z-10">
+<!-- ================= LANDING PAGE ================= -->
+<div id="landingPage" class="relative z-10">
 
-  <!-- VIDEO -->
-  <div class="w-1/2 h-full relative overflow-hidden">
+  <!-- 1️⃣ VIDEO HERO SECTION -->
+  <section class="relative h-screen w-full overflow-hidden">
     <video
       class="absolute inset-0 w-full h-full object-cover"
       src="assests/video.mp4"
@@ -87,108 +218,112 @@
     </video>
     <div class="absolute inset-0 bg-black/60"></div>
     
-    <!-- BRANDING OVERLAY -->
-    <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-8">
-      <h1 class="text-6xl font-bold mb-4 tracking-tight">Wayfinder</h1>
-      <p class="text-xl text-chat-secondary max-w-md leading-relaxed">
-        Navigate Your Career Journey with AI-Powered Precision
+    <!-- Hero Content -->
+    <div class="relative h-full flex items-center justify-center px-6">
+      <div class="text-center max-w-4xl">
+        <div class="mb-8">
+          <h1 class="hero-title text-7xl md:text-9xl font-bold mb-4 tracking-tight">
+            Wayfinder
+          </h1>
+        </div>
+        <h2 class="hero-subtitle text-2xl md:text-4xl font-semibold mb-8 leading-tight">
+          Navigate Your Career with AI Precision
+        </h2>
+        <button onclick="goToApp()" 
+                class="bg-white text-black px-8 py-4 rounded-xl text-lg font-semibold hover:scale-105 transition-all duration-300 shadow-2xl">
+          Start Your Journey
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2️⃣ STRATEGY INTRO SECTION -->
+  <section class="py-24 px-6">
+    <div class="max-w-2xl mx-auto text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-6">
+        AI That Understands Your Ambitions
+      </h2>
+      <div class="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mx-auto mb-8"></div>
+      <p class="text-xl text-chat-secondary leading-relaxed">
+        Unlike generic career advice, Wayfinder analyzes your unique profile, identifies precise skill gaps, 
+        and creates personalized roadmaps that adapt to your goals and industry demands.
       </p>
     </div>
-  </div>
+  </section>
 
-  <!-- AUTH FORMS -->
-  <div class="w-1/2 flex items-center justify-center bg-black px-16">
-    <div class="w-full max-w-md">
-      
-      <!-- Login Form -->
-      <div id="loginForm" class="glass border border-chat-border rounded-2xl p-8">
-        <div class="text-center mb-8">
-          <h2 class="text-2xl font-bold mb-2">Welcome Back</h2>
-          <p class="text-chat-secondary">Sign in to continue your career journey</p>
-        </div>
+  <!-- 3️⃣ FEATURE CARDS SECTION -->
+  <section class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-3 gap-8">
         
-        <div class="space-y-4">
-          <input type="email" id="loginEmail" placeholder="Email Address" 
-                 class="w-full p-4 bg-chat-bg border border-chat-border rounded-xl text-base"
-                 autocomplete="email" required>
-          <input type="password" id="loginPassword" placeholder="Password" 
-                 class="w-full p-4 bg-chat-bg border border-chat-border rounded-xl text-base"
-                 autocomplete="current-password" required>
-          <button onclick="login()" type="button"
-                  class="w-full bg-white text-black py-4 rounded-xl text-base font-semibold hover:scale-[1.02] transition">
-            Sign In
-          </button>
-        </div>
-        
-        <div class="text-center mt-6">
-          <p class="text-sm text-chat-secondary">
-            New to Wayfinder? 
-            <button onclick="showRegister()" class="text-white hover:underline font-medium">Create Account</button>
+        <!-- Card 1 -->
+        <div class="shimmer-card bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Intelligent Resume Analysis</h3>
+          <p class="text-chat-secondary leading-relaxed">
+            Upload your resume and receive instant AI-powered insights with specific improvement recommendations tailored to your target roles.
           </p>
         </div>
-      </div>
-      
-      <!-- Register Form -->
-      <div id="registerForm" class="hidden glass border border-chat-border rounded-2xl p-8">
-        <div class="text-center mb-8">
-          <h2 class="text-2xl font-bold mb-2">Join Wayfinder</h2>
-          <p class="text-chat-secondary">Start your personalized career guidance today</p>
-        </div>
-        
-        <div class="space-y-4">
-          <input type="text" id="registerName" placeholder="Full Name" 
-                 class="w-full p-4 bg-chat-bg border border-chat-border rounded-xl text-base">
-          <input type="email" id="registerEmail" placeholder="Email Address" 
-                 class="w-full p-4 bg-chat-bg border border-chat-border rounded-xl text-base">
-          <input type="password" id="registerPassword" placeholder="Create Password" 
-                 class="w-full p-4 bg-chat-bg border border-chat-border rounded-xl text-base">
-          <button onclick="register()" 
-                  class="w-full bg-white text-black py-4 rounded-xl text-base font-semibold hover:scale-[1.02] transition">
-            Create Account
-          </button>
-        </div>
-        
-        <div class="text-center mt-6">
-          <p class="text-sm text-chat-secondary">
-            Already have an account? 
-            <button onclick="showLogin()" class="text-white hover:underline font-medium">Sign In</button>
+
+        <!-- Card 2 -->
+        <div class="shimmer-card bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Precision Skill Mapping</h3>
+          <p class="text-chat-secondary leading-relaxed">
+            Identify exact skill gaps for your dream role and receive curated learning paths with timeline estimates and priority rankings.
           </p>
         </div>
+
+        <!-- Card 3 -->
+        <div class="shimmer-card bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 hover:-translate-y-1 transition-all duration-300">
+          <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-blue-600 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold mb-4">Strategic Career Roadmaps</h3>
+          <p class="text-chat-secondary leading-relaxed">
+            Get 90-day action plans with specific milestones, project suggestions, and resource recommendations aligned with industry trends.
+          </p>
+        </div>
+
       </div>
-      
     </div>
-  </div>
-</div>
-<!-- ================= LANDING PAGE ================= -->
-<div id="landingPage" class="hidden relative h-full w-full flex z-10">
+  </section>
 
-  <!-- VIDEO -->
-  <div class="w-1/2 h-full relative overflow-hidden">
-    <video
-      class="absolute inset-0 w-full h-full object-cover"
-      src="assests/video.mp4"
-      autoplay
-      muted
-      loop
-      playsinline>
-    </video>
-    <div class="absolute inset-0 bg-black/60"></div>
-  </div>
-
-  <!-- CONTENT -->
-  <div class="w-1/2 flex items-center justify-center bg-black px-16">
-    <div class="max-w-md">
-      <h1 class="text-5xl font-bold mb-6 tracking-tight">Wayfinder</h1>
-      <p class="text-lg text-chat-secondary mb-10 leading-relaxed">
-        Your AI-powered career mentor for skills, clarity, and growth.
-        Student's Most Trusted Career Companion.
-      </p>
-      <button onclick="goToApp()"
-        class="w-full bg-white text-black py-4 rounded-xl text-lg font-semibold hover:scale-[1.03] transition">
-        Get Started
-      </button>
+  <!-- 4️⃣ FINAL CTA SECTION -->
+  <section class="py-24 px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-gradient-to-r from-zinc-900 to-zinc-800 rounded-3xl p-12 md:p-16 text-center border border-white/10">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6">
+          Ready to Accelerate Your Career?
+        </h2>
+        <p class="text-xl text-chat-secondary mb-8 max-w-2xl mx-auto">
+          Join thousands of professionals who've transformed their careers with AI-powered guidance. 
+          Start your personalized journey today.
+        </p>
+        <button onclick="goToApp()" 
+                class="bg-white text-black px-10 py-4 rounded-xl text-lg font-semibold hover:scale-105 transition-all duration-300 inline-flex items-center gap-2">
+          Launch Wayfinder
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </button>
+        <p class="text-sm text-chat-secondary mt-6">
+          Powered by Google Gemini AI • Trusted by Students Worldwide
+        </p>
+      </div>
     </div>
-  </div>
+  </section>
+
 </div>
 
 <!-- ================= MAIN APP ================= -->
@@ -201,10 +336,6 @@
         <span class="text-xl font-semibold tracking-wide">Wayfinder</span>
       </div>
       <div class="flex items-center space-x-4 sm:space-x-6">
-        <span id="userInfo" class="text-sm text-chat-secondary hidden sm:block"></span>
-        <button onclick="logout()" class="text-chat-secondary hover:text-white transition text-sm">
-          Logout
-        </button>
         <button onclick="toggleHistory()" class="text-chat-secondary hover:text-white transition">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.955 8.955 0 01-2.172-.274l-5.656 2.121.898-3.584A8.005 8.005 0 013 12c0-4.418 3.582-8 8-8s8 3.582 8 8z"></path>
@@ -219,55 +350,67 @@
     <div class="max-w-4xl mx-auto space-y-6 sm:space-y-8">
 
       <!-- ASK -->
-      <section class="glass border border-chat-border rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-all">
-        <h3 class="text-lg sm:text-xl font-semibold mb-4 tracking-wide">
+      <section class="glass border border-chat-border rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-all chat-card">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4 tracking-wide flex items-center gap-2">
+          <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
           Ask a Career Question
         </h3>
         <textarea id="question"
-          class="w-full h-24 sm:h-32 bg-chat-bg border border-chat-border rounded-xl p-4 sm:p-5 text-sm sm:text-base placeholder:text-chat-secondary resize-none"
+          class="w-full h-24 sm:h-32 bg-chat-bg border border-chat-border rounded-xl p-4 sm:p-5 text-sm sm:text-base placeholder:text-chat-secondary resize-none focus:border-white/50 transition-all"
           placeholder="Ask anything about careers, skills, roadmap, projects..."></textarea>
         <button onclick="setMode('ask'); askQuestion();"
-          class="mt-4 bg-white text-black px-4 sm:px-6 py-3 rounded-xl text-sm sm:text-base font-semibold hover:scale-[1.03] transition">
+          class="mt-4 bg-white text-black px-4 sm:px-6 py-3 rounded-xl text-sm sm:text-base font-semibold hover:scale-[1.03] transition-all shadow-lg hover:shadow-xl">
           Ask AI
         </button>
       </section>
 
       <!-- RESUME -->
-      <section class="glass border border-chat-border rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-all">
-        <h3 class="text-lg sm:text-xl font-semibold mb-4 tracking-wide">
+      <section class="glass border border-chat-border rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-all chat-card">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4 tracking-wide flex items-center gap-2">
+          <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
           Analyze Your Resume
         </h3>
         <input type="file" id="resume" accept=".pdf"
-          class="block w-full text-xs sm:text-sm text-chat-secondary file:bg-white file:text-black file:px-3 file:py-2 file:rounded-lg file:text-xs sm:file:text-sm">
+          class="block w-full text-xs sm:text-sm text-chat-secondary file:bg-white file:text-black file:px-3 file:py-2 file:rounded-lg file:text-xs sm:file:text-sm file:border-0 file:font-semibold hover:file:bg-gray-100 transition-all">
         <button onclick="analyzeResume()"
-          class="mt-4 bg-white text-black px-4 sm:px-6 py-3 rounded-xl text-sm sm:text-base font-semibold hover:scale-[1.03] transition">
+          class="mt-4 bg-white text-black px-4 sm:px-6 py-3 rounded-xl text-sm sm:text-base font-semibold hover:scale-[1.03] transition-all shadow-lg hover:shadow-xl">
           Analyze Resume
         </button>
       </section>
 
       <!-- FEATURES -->
       <section class="grid grid-cols-2 gap-3 sm:gap-4">
-        <button onclick="setMode('skill_gaps')" class="glass border border-chat-border rounded-xl py-3 sm:py-4 hover:border-white/40 transition text-xs sm:text-sm">
-          🔍 Skill Gaps
+        <button onclick="setMode('skill_gaps')" class="glass border border-chat-border rounded-xl py-3 sm:py-4 hover:border-white/40 transition-all text-xs sm:text-sm chat-card group">
+          <span class="text-lg mb-1 block group-hover:scale-110 transition-transform">🔍</span>
+          Skill Gaps
         </button>
-        <button onclick="setMode('roadmap')" class="glass border border-chat-border rounded-xl py-3 sm:py-4 hover:border-white/40 transition text-xs sm:text-sm">
-          🗺️ Career Roadmap
+        <button onclick="setMode('roadmap')" class="glass border border-chat-border rounded-xl py-3 sm:py-4 hover:border-white/40 transition-all text-xs sm:text-sm chat-card group">
+          <span class="text-lg mb-1 block group-hover:scale-110 transition-transform">🗺️</span>
+          Career Roadmap
         </button>
-        <button onclick="setMode('projects')" class="glass border border-chat-border rounded-xl py-3 sm:py-4 hover:border-white/40 transition text-xs sm:text-sm">
-          💡 Project Ideas
+        <button onclick="setMode('projects')" class="glass border border-chat-border rounded-xl py-3 sm:py-4 hover:border-white/40 transition-all text-xs sm:text-sm chat-card group">
+          <span class="text-lg mb-1 block group-hover:scale-110 transition-transform">💡</span>
+          Project Ideas
         </button>
-        <button onclick="setMode('resources')" class="glass border border-chat-border rounded-xl py-3 sm:py-4 hover:border-white/40 transition text-xs sm:text-sm">
-          📚 Learning Resources
+        <button onclick="setMode('resources')" class="glass border border-chat-border rounded-xl py-3 sm:py-4 hover:border-white/40 transition-all text-xs sm:text-sm chat-card group">
+          <span class="text-lg mb-1 block group-hover:scale-110 transition-transform">📚</span>
+          Learning Resources
         </button>
       </section>
 
       <!-- OUTPUT -->
-      <section class="glass border border-chat-border rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-all mb-8">
-        <h3 class="text-lg sm:text-xl font-semibold mb-4 tracking-wide">
+      <section class="glass border border-chat-border rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-all mb-8 chat-card">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4 tracking-wide flex items-center gap-2">
+          <span class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></span>
           AI Response
+          <div id="typingIndicator" class="typing-indicator ml-auto hidden">
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+            <div class="typing-dot"></div>
+          </div>
         </h3>
         <div id="output"
-          class="prose prose-invert prose-sm sm:prose-base max-w-none bg-chat-bg p-4 sm:p-6 rounded-xl border border-chat-border text-chat-text min-h-[200px] max-h-[600px] overflow-y-auto">
+          class="prose prose-invert prose-sm sm:prose-base max-w-none bg-chat-bg p-4 sm:p-6 rounded-xl border border-chat-border text-chat-text min-h-[200px] max-h-[600px] overflow-y-auto transition-all">
           <p class="text-chat-secondary text-center">
             Waiting for input…
           </p>
@@ -294,8 +437,6 @@
 
   <!-- OVERLAY FOR MOBILE -->
   <div id="historyOverlay" class="hidden fixed inset-0 bg-black/50 z-30" onclick="toggleHistory()"></div>
-
-</div>
 
 </div>
 

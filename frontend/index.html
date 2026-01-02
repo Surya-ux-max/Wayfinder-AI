@@ -72,8 +72,95 @@
 <!-- STARS -->
 <div class="stars"></div>
 
+<!-- ================= AUTH PAGE ================= -->
+<div id="authPage" class="relative h-full w-full flex z-10">
+
+  <!-- VIDEO -->
+  <div class="w-1/2 h-full relative overflow-hidden">
+    <video
+      class="absolute inset-0 w-full h-full object-cover"
+      src="assests/video.mp4"
+      autoplay
+      muted
+      loop
+      playsinline>
+    </video>
+    <div class="absolute inset-0 bg-black/60"></div>
+    
+    <!-- BRANDING OVERLAY -->
+    <div class="absolute inset-0 flex flex-col justify-center items-center text-center px-8">
+      <h1 class="text-6xl font-bold mb-4 tracking-tight">Wayfinder</h1>
+      <p class="text-xl text-chat-secondary max-w-md leading-relaxed">
+        Navigate Your Career Journey with AI-Powered Precision
+      </p>
+    </div>
+  </div>
+
+  <!-- AUTH FORMS -->
+  <div class="w-1/2 flex items-center justify-center bg-black px-16">
+    <div class="w-full max-w-md">
+      
+      <!-- Login Form -->
+      <div id="loginForm" class="glass border border-chat-border rounded-2xl p-8">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-bold mb-2">Welcome Back</h2>
+          <p class="text-chat-secondary">Sign in to continue your career journey</p>
+        </div>
+        
+        <div class="space-y-4">
+          <input type="email" id="loginEmail" placeholder="Email Address" 
+                 class="w-full p-4 bg-chat-bg border border-chat-border rounded-xl text-base"
+                 autocomplete="email" required>
+          <input type="password" id="loginPassword" placeholder="Password" 
+                 class="w-full p-4 bg-chat-bg border border-chat-border rounded-xl text-base"
+                 autocomplete="current-password" required>
+          <button onclick="login()" type="button"
+                  class="w-full bg-white text-black py-4 rounded-xl text-base font-semibold hover:scale-[1.02] transition">
+            Sign In
+          </button>
+        </div>
+        
+        <div class="text-center mt-6">
+          <p class="text-sm text-chat-secondary">
+            New to Wayfinder? 
+            <button onclick="showRegister()" class="text-white hover:underline font-medium">Create Account</button>
+          </p>
+        </div>
+      </div>
+      
+      <!-- Register Form -->
+      <div id="registerForm" class="hidden glass border border-chat-border rounded-2xl p-8">
+        <div class="text-center mb-8">
+          <h2 class="text-2xl font-bold mb-2">Join Wayfinder</h2>
+          <p class="text-chat-secondary">Start your personalized career guidance today</p>
+        </div>
+        
+        <div class="space-y-4">
+          <input type="text" id="registerName" placeholder="Full Name" 
+                 class="w-full p-4 bg-chat-bg border border-chat-border rounded-xl text-base">
+          <input type="email" id="registerEmail" placeholder="Email Address" 
+                 class="w-full p-4 bg-chat-bg border border-chat-border rounded-xl text-base">
+          <input type="password" id="registerPassword" placeholder="Create Password" 
+                 class="w-full p-4 bg-chat-bg border border-chat-border rounded-xl text-base">
+          <button onclick="register()" 
+                  class="w-full bg-white text-black py-4 rounded-xl text-base font-semibold hover:scale-[1.02] transition">
+            Create Account
+          </button>
+        </div>
+        
+        <div class="text-center mt-6">
+          <p class="text-sm text-chat-secondary">
+            Already have an account? 
+            <button onclick="showLogin()" class="text-white hover:underline font-medium">Sign In</button>
+          </p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
 <!-- ================= LANDING PAGE ================= -->
-<div id="landingPage" class="relative h-full w-full flex z-10">
+<div id="landingPage" class="hidden relative h-full w-full flex z-10">
 
   <!-- VIDEO -->
   <div class="w-1/2 h-full relative overflow-hidden">
@@ -105,87 +192,110 @@
 </div>
 
 <!-- ================= MAIN APP ================= -->
-<div id="appPage" class="hidden relative h-full w-full overflow-auto z-10">
+<div id="appPage" class="hidden relative h-full w-full flex overflow-hidden z-10">
 
   <!-- HEADER -->
-  <header class="sticky top-0 bg-black/80 backdrop-blur border-b border-chat-border">
-    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+  <header class="absolute top-0 left-0 right-0 bg-black/80 backdrop-blur border-b border-chat-border z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <span class="text-xl font-semibold tracking-wide">Wayfinder</span>
       </div>
-      <nav class="text-sm text-chat-secondary space-x-6">
-        <span>Ask</span>
-        <span>Resume</span>
-        <span>Insights</span>
-      </nav>
+      <div class="flex items-center space-x-4 sm:space-x-6">
+        <span id="userInfo" class="text-sm text-chat-secondary hidden sm:block"></span>
+        <button onclick="logout()" class="text-chat-secondary hover:text-white transition text-sm">
+          Logout
+        </button>
+        <button onclick="toggleHistory()" class="text-chat-secondary hover:text-white transition">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.955 8.955 0 01-2.172-.274l-5.656 2.121.898-3.584A8.005 8.005 0 013 12c0-4.418 3.582-8 8-8s8 3.582 8 8z"></path>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- CONTENT -->
-  <main class="max-w-3xl mx-auto p-8 space-y-10">
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 pt-20 pb-4 px-4 sm:px-6 overflow-y-auto">
+    <div class="max-w-4xl mx-auto space-y-6 sm:space-y-8">
 
-    <!-- ASK -->
-    <section class="glass border border-chat-border rounded-2xl p-6 hover:border-white/40 transition-all">
-      <h3 class="text-xl font-semibold mb-4 tracking-wide">
-        Ask a Career Question
-      </h3>
-      <textarea id="question"
-        class="w-full h-32 bg-chat-bg border border-chat-border rounded-xl p-5 text-base placeholder:text-chat-secondary resize-none"
-        placeholder="Ask anything about careers, skills, roadmap, projects..."></textarea>
-      <button onclick="setMode('ask'); askQuestion();"
-        class="mt-4 bg-white text-black px-6 py-3 rounded-xl text-base font-semibold hover:scale-[1.03] transition">
-        Ask AI
-      </button>
-    </section>
+      <!-- ASK -->
+      <section class="glass border border-chat-border rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-all">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4 tracking-wide">
+          Ask a Career Question
+        </h3>
+        <textarea id="question"
+          class="w-full h-24 sm:h-32 bg-chat-bg border border-chat-border rounded-xl p-4 sm:p-5 text-sm sm:text-base placeholder:text-chat-secondary resize-none"
+          placeholder="Ask anything about careers, skills, roadmap, projects..."></textarea>
+        <button onclick="setMode('ask'); askQuestion();"
+          class="mt-4 bg-white text-black px-4 sm:px-6 py-3 rounded-xl text-sm sm:text-base font-semibold hover:scale-[1.03] transition">
+          Ask AI
+        </button>
+      </section>
 
-    <!-- RESUME -->
-    <section class="glass border border-chat-border rounded-2xl p-6 hover:border-white/40 transition-all">
-      <h3 class="text-xl font-semibold mb-4 tracking-wide">
-        Analyze Your Resume
-      </h3>
-      <input type="file" id="resume" accept=".pdf"
-        class="block w-full text-sm text-chat-secondary file:bg-white file:text-black file:px-4 file:py-2 file:rounded-lg">
-      <button onclick="analyzeResume()"
-        class="mt-4 bg-white text-black px-6 py-3 rounded-xl text-base font-semibold hover:scale-[1.03] transition">
-        Analyze Resume
-      </button>
-    </section>
+      <!-- RESUME -->
+      <section class="glass border border-chat-border rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-all">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4 tracking-wide">
+          Analyze Your Resume
+        </h3>
+        <input type="file" id="resume" accept=".pdf"
+          class="block w-full text-xs sm:text-sm text-chat-secondary file:bg-white file:text-black file:px-3 file:py-2 file:rounded-lg file:text-xs sm:file:text-sm">
+        <button onclick="analyzeResume()"
+          class="mt-4 bg-white text-black px-4 sm:px-6 py-3 rounded-xl text-sm sm:text-base font-semibold hover:scale-[1.03] transition">
+          Analyze Resume
+        </button>
+      </section>
 
-    <!-- FEATURES -->
-    <section class="grid grid-cols-2 gap-4">
-      <button onclick="setMode('skill_gaps')" class="glass border border-chat-border rounded-xl py-4 hover:border-white/40 transition">
-        🔍 Skill Gaps
-      </button>
-      <button onclick="setMode('roadmap')" class="glass border border-chat-border rounded-xl py-4 hover:border-white/40 transition">
-        🗺️ Career Roadmap
-      </button>
-      <button onclick="setMode('projects')" class="glass border border-chat-border rounded-xl py-4 hover:border-white/40 transition">
-        💡 Project Ideas
-      </button>
-      <button onclick="setMode('resources')" class="glass border border-chat-border rounded-xl py-4 hover:border-white/40 transition">
-        📚 Learning Resources
-      </button>
-    </section>
+      <!-- FEATURES -->
+      <section class="grid grid-cols-2 gap-3 sm:gap-4">
+        <button onclick="setMode('skill_gaps')" class="glass border border-chat-border rounded-xl py-3 sm:py-4 hover:border-white/40 transition text-xs sm:text-sm">
+          🔍 Skill Gaps
+        </button>
+        <button onclick="setMode('roadmap')" class="glass border border-chat-border rounded-xl py-3 sm:py-4 hover:border-white/40 transition text-xs sm:text-sm">
+          🗺️ Career Roadmap
+        </button>
+        <button onclick="setMode('projects')" class="glass border border-chat-border rounded-xl py-3 sm:py-4 hover:border-white/40 transition text-xs sm:text-sm">
+          💡 Project Ideas
+        </button>
+        <button onclick="setMode('resources')" class="glass border border-chat-border rounded-xl py-3 sm:py-4 hover:border-white/40 transition text-xs sm:text-sm">
+          📚 Learning Resources
+        </button>
+      </section>
 
-    <!-- OUTPUT -->
-    <section class="glass border border-chat-border rounded-2xl p-6 hover:border-white/40 transition-all">
-      <h3 class="text-xl font-semibold mb-4 tracking-wide">
-        AI Response
-      </h3>
-      <div id="output"
-        class="prose prose-invert max-w-none bg-chat-bg p-6 rounded-xl border border-chat-border text-chat-text">
-        <p class="text-chat-secondary text-center">
-          Waiting for input…
-        </p>
-      </div>
-    </section>
+      <!-- OUTPUT -->
+      <section class="glass border border-chat-border rounded-2xl p-4 sm:p-6 hover:border-white/40 transition-all mb-8">
+        <h3 class="text-lg sm:text-xl font-semibold mb-4 tracking-wide">
+          AI Response
+        </h3>
+        <div id="output"
+          class="prose prose-invert prose-sm sm:prose-base max-w-none bg-chat-bg p-4 sm:p-6 rounded-xl border border-chat-border text-chat-text min-h-[200px] max-h-[600px] overflow-y-auto">
+          <p class="text-chat-secondary text-center">
+            Waiting for input…
+          </p>
+        </div>
+      </section>
 
+    </div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="text-center text-chat-secondary text-sm py-6">
-    © 2025 Wayfinder · Built with Agentic AI
-  </footer>
+  <!-- HISTORY SIDEBAR (RIGHT SIDE) -->
+  <div id="historySidebar" class="hidden fixed top-0 right-0 w-80 sm:w-96 h-full bg-black/95 backdrop-blur border-l border-chat-border z-40 transform translate-x-full transition-transform duration-300">
+    <div class="p-4 border-b border-chat-border flex justify-between items-center">
+      <h2 class="text-lg font-semibold">Chat History</h2>
+      <button onclick="toggleHistory()" class="text-chat-secondary hover:text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <div id="sessionsList" class="flex-1 overflow-y-auto p-4 space-y-2">
+      <p class="text-chat-secondary text-center text-sm mt-8">No conversations yet</p>
+    </div>
+  </div>
+
+  <!-- OVERLAY FOR MOBILE -->
+  <div id="historyOverlay" class="hidden fixed inset-0 bg-black/50 z-30" onclick="toggleHistory()"></div>
+
+</div>
 
 </div>
 
